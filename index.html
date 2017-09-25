@@ -1,59 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="assets/javascript/app.js"></script>
     <title>
         Totally Trivial Trivia!
     </title>
-  </head>
-  <body>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-6 alert alert-primary" id="welcome-message">
+        	<h1> Advanced Totally Trivia </h1>
+            Welcome to The Game of Waisting Time with the Least Important Information You Need to Know
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary button" id="#start-game">Start</button>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+            <div class="jumbotron time" id="time">
+                <span>Time Remaining: </span>
+            </div>
+            <div class="quizContainer">
+                <div class="question" id="question"></div>
+                <ol class="container-fluid" id="choiceList"></ol>
+                <div class="quizMessage" id="quizMessage"></div>
+            </div>
 
 
-<div class="container">
-    <div class="col-6 alert alert-primary" id="welcome-message">
-		Welcome to The Game of Waisting Time with the Least Important Information You Need to Know
-    </div>
+            <div id="accessories">
+                <div class="result" id="result"></div>
+                <div id="images"></div>
+                <br>
+            </div>
+</body>
 
-
-
-<div class="container">
-  <div class="row">
-    <div class="col">
-    </div>
-    <div class="col-6">
-			<button class="btn btn-primary button" id="#start-game">Start</button>
-    </div>
-    <div class="col">
-    </div>
-  </div>
-
-	
-	<div id="time">
-	<span></span>
-	</div>
-
-  
-    <div class="quizContainer">
-
-        <div class="question" id="question"></div>
-        <ul class="choiceList" id="choiceList"></ul>
-        <div class="quizMessage" id="quizMessage"></div>
-        <div class="result" id="result"></div>
-        <div class="nextButton" id="nextButton"></div>
-        <br>
-    </div>
-
-
-
-  </body>
 </html>
