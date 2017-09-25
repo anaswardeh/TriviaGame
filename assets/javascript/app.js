@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
     //Hide the timer in the landing page
 
     $("#time").hide();
@@ -7,7 +8,6 @@ $(document).ready(function() {
 
 
     //Create the object 
-
     var questionOb = [{
             question: "The Eiffel Tower is located where in Paris?",
             choices: ["Bois de Boulogne",
@@ -97,7 +97,6 @@ $(document).ready(function() {
 
 
     //Start the Game and Choose the answer
-
     $(".button").on("click", function() {
         $(".button").hide();
         $("#welcome-message").hide();
@@ -111,133 +110,86 @@ $(document).ready(function() {
     var answerValue;
     var dataValue;
     var firstQuestion;
-
-
     var j = 0;
 
+
     function startGame() {
-
-
         $(".checkbox").remove();
-
-
         firstQuestion = questionOb[j];
-
-
         console.log(firstQuestion.question);
         console.log(firstQuestion.choices);
-
         $("#question").html('<h1>' + firstQuestion.question + '<h1>');
-
         var choiceCount = 1;
-
         answerValue = firstQuestion.correctAnswer;
-
         console.log(firstQuestion.correctAnswer);
-
         for (var i = 0; i < firstQuestion.choices.length; i++) {
-
             var answerDiv = $("<div id='answer'>");
-
             choice = firstQuestion.choices[i];
 
             //console.log(choice);
-
             var p = $("<p>").html('<li>' + choice + '</li>');
-
             answerDiv.attr("style", "cursor: pointer");
-
             answerDiv.append(p);
-
-
             p.attr("data-item", "data-item-" + choiceCount);
-
             p.attr("id", "pTag");
-
             answerDiv.addClass("checkbox");
-
             p.addClass("value");
-
-
             $("#choiceList").append(answerDiv);
-
             choiceCount++
-
         }
 
 
-
-
         $(document.body).one("click", ".checkbox", function() {
-
-
-
             dataValue = $(this).find('p.value').text();
-
-
             if (dataValue === answerValue) {
-
                 getCorrectRandomImage(arrayImg, "");
-
                 (function() {
-
                     var myDiv = document.getElementById("images"),
-
                         show = function() {
                             myDiv.style.display = "block";
                             setTimeout(hide, 5000); // 5 seconds
                             $(".quizContainer").hide();
                         },
-
                         hide = function() {
                             myDiv.style.display = "none";
                             $(".quizContainer").show();
                             j++;
-
-                            if (j > 10) {
+                            if (j > 9) {
+                                j = 0;
                                 $(".quizContainer").hide();
                                 $("#question").remove();
-
+                                $('#result').append('<p><img id="theImg" src="assets/images/endGame.gif" /></p>');
+                                $("#result").append("The Game is Over! Let's Get Productive with Something of a Value!");
                             }
-
                             startGame();
                             startTiming();
                         };
 
                     show();
                 })();
-
-
-
             } else {
                 getIncorrectRandomImage(arrayImg1, "");
-
                 (function() {
                     var myDiv = document.getElementById("images"),
-
                         show = function() {
                             myDiv.style.display = "block";
                             setTimeout(hide, 5000); // 5 seconds
                             $(".quizContainer").hide();
                             $("#time").html("The Correct answer was: " + answerValue);
                         },
-
                         hide = function() {
                             myDiv.style.display = "none";
                             $(".quizContainer").show();
-
                             j++;
-
-                            if (j > 10) {
-                                $(".quizContainer").hide();
-                                $("#question").remove();
-
+                            if (j > 9) {
+                                j = 0;
+                                $(".quizContainer").remove();
+                                $('#result').append('<p><img id="theImg" src="assets/images/endGame.gif" /></p>');
+                                $("#result").append("The Game is Over! Let's Get Productive with Something of a Value!")
                             }
-
                             startGame();
                             startTiming();
                         };
-
                     show();
                 })();
             }
@@ -246,54 +198,34 @@ $(document).ready(function() {
 
 
     //Counting Results
-
     var win = 0;
     var loss = 0;
 
     $(document.body).on("click", ".checkbox", function() {
-
         dataValue = $(this).find('p.value').text();
-
-
         if (dataValue === answerValue) {
             win++;
             console.log("correct " + win);
-
-
-
         } else {
-
             loss++;
-
-
             console.log("incorrect " + loss);
         }
-
         $("#result").html("Correct Answers: " + win + '<br />');
         $("#result").append("Incorrect Answers: " + loss);
-
-
     });
 
 
 
-
-
     //Create Timer
-
     function startTimer(duration, display) {
         var timer = duration,
             minutes, seconds;
-
         var __timer = setInterval(function() {
             minutes = parseInt(timer / 60, 10)
             seconds = parseInt(timer % 60, 10);
-
             minutes = minutes < 10 ? "0" + minutes : minutes;
             seconds = seconds < 10 ? "0" + seconds : seconds;
-
             display.textContent = "Remaining Time: " + minutes + ":" + seconds;
-
             if (--timer < 0) {
                 clearInterval(__timer);
                 timer = duration;
@@ -301,30 +233,30 @@ $(document).ready(function() {
                 $(".quizContainer").remove();
                 $("#result").html("Correct Answers: " + win + '<br />');
                 $("#result").append("Incorrect Answers: " + loss);
+                $('#result').append('<p><img id="theImg" src="assets/images/endGame.gif" /></p>');
+                $("#result").append("The Game is Over! Let's Get Productive with Something of a Value!")
             }
-
-            if (j > 10) {
+            if (j > 9) {
+                j = 0;
                 clearInterval(__timer);
                 timer = duration;
                 $("#time").remove();
                 $("#images").remove();
+                $('#result').append('<p><img id="theImg" src="assets/images/endGame.gif" /></p>');
+                $("#result").append("The Game is Over! Let's Get Productive with Something of a Value!")
             }
-
             $(document.body).one("click", ".checkbox", function() {
                 clearInterval(__timer);
             })
-
-
         }, 1000);
     }
+
 
     function startTiming() {
         var fiveMinutes = 30 * 1,
             display = document.querySelector("#time");
         startTimer(fiveMinutes, display);
     };
-
-
 
 
     var arrayImg = new Array();
@@ -339,15 +271,12 @@ $(document).ready(function() {
     arrayImg[8] = "assets/images/9-correct.gif";
     arrayImg[9] = "assets/images/10-correct.gif";
 
-
-
     function getCorrectRandomImage(imgAr, path) {
         path = path || ''; // default path here
         var num = Math.floor(Math.random() * imgAr.length);
         var img = imgAr[num];
         var imgStr = '<img src="' + path + img + '" alt = "" width="50%" height="50%">';
         $("#images").html(imgStr);
-
     }
 
 
@@ -363,16 +292,11 @@ $(document).ready(function() {
     arrayImg1[8] = "assets/images/9-incorrect.gif";
     arrayImg1[9] = "assets/images/10-incorrect.gif";
 
-
-
     function getIncorrectRandomImage(imgAr, path) {
         path = path || ''; // default path here
         var num = Math.floor(Math.random() * imgAr.length);
         var img = imgAr[num];
         var imgStr = '<img src="' + path + img + '" alt = "" width="50%" height="50%">';
         $("#images").html(imgStr);
-
-
     }
-
 });
